@@ -1,6 +1,5 @@
 import { PokemonService } from './../pokemon.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -9,22 +8,30 @@ import { Subject } from 'rxjs';
 })
 export class PokemonListComponent implements OnInit, OnDestroy {
 
-pokemonList: any = [];
-dtOptions: DataTables.Settings = {};
-dtTrigger: Subject<any> = new Subject<any>();
-
+  pokemonList: any = [];
+  page = 0; 
+  itemsPerPage = 20;
+  totalItems : any;
 
   constructor(private service: PokemonService) { 
   }
-  
+
   ngOnInit(): void {
-    this.service.getPokemonList().subscribe((response) => {
+    this.service.getPokemonList(this.itemsPerPage, this.page).subscribe((response) => {
       this.pokemonList = response.results;
-      this.dtTrigger.next();
+      // this.page = 0;
+      this.totalItems = response.count;
+    });
+  }
+
+  getNextPage(page: any){
+    this.service.getPokemonList(this.itemsPerPage, page).subscribe((response) => {
+      this.pokemonList = response.results;
+      this.totalItems = response.count;
     });
   }
 
   ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
   }
+
 }

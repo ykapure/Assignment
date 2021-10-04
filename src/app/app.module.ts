@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DataTablesModule,
     NgbModule
   ],
   providers: [],

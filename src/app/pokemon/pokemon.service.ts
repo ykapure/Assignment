@@ -9,8 +9,9 @@ export class PokemonService {
 
   constructor(private http: HttpClient){ }
 
-  getPokemonList(): Observable<any> {
-    return this.http.get<any>('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0');
+  getPokemonList(itemsPerPage: any,page: any): Observable<any> {
+    
+    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${page}`);
   }
   
 }

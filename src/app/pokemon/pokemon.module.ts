@@ -5,6 +5,7 @@ import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 import { DataTablesModule } from 'angular-datatables';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { DataTablesModule } from 'angular-datatables';
     CommonModule,
     PokemonRoutingModule,
     DataTablesModule,
+    NgxPaginationModule,
   ]
 })
 export class PokemonModule { }
