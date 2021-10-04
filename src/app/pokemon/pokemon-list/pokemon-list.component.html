@@ -1,0 +1,31 @@
+ 
+  <form>
+    <div class="form-group form-inline">
+        <table class="table table-responsive table-striped table-hover" 
+        datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pk of pokemonList; let i = index">
+                    <td>{{pk.name}}</td>
+                    <td>{{pk.url}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+  <!-- <div class="card-columns">
+    <div class="card" *ngFor="let pk of pokemonList">
+      <div class="card-body">
+        {{ pk.name}}
+        <a href="{{pk.url}}" class="card-link">Card link</a>
+      </div>
+    </div>
+  </div> -->
+
+    
