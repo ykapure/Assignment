@@ -1,6 +1,8 @@
 import { PokemonService } from './../pokemon.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -21,7 +23,11 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   pageSizes = [10, 20, 50];
   totalItems = 0;
 
-  constructor(private service: PokemonService,private spinner: NgxSpinnerService) { 
+  constructor(
+    private service: PokemonService,
+    private spinner: NgxSpinnerService,
+    private route: Router,
+    private sharedService: SharedDataService) { 
   }
 
   ngOnInit(): void {
@@ -69,6 +75,17 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   setActiveCard(poke: any, ind: any) {
     console.log(poke);
     console.log(ind);
+    const obj = {
+      searchKey: this.searchKey,
+      page: this.page,
+      itemsPerPage: this.itemsPerPage,
+      activePokemon: poke,
+      activePokemonIndex: ind
+    }
+    this.spinner.show();
+    this.sharedService.changeSharedData(obj);
+    // this.route.navigateByUrl('/details');
+    this.route.navigate(['/pokemon/details']);
   }
 
   ngOnDestroy(): void {

@@ -6,7 +6,7 @@ import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { PokemonService } from './pokemon.service';
 
 
 @NgModule({
@@ -15,8 +15,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CommonModule,
     PokemonRoutingModule,
     FormsModule,
-    NgxPaginationModule,
-    // NgxSpinnerModule
-  ]
+    NgxPaginationModule
+  ],
+  providers:[PokemonService]
 })
 export class PokemonModule { }

@@ -1,1 +1,18 @@
-<p>pokemon-details works!</p>
+<button class="btn btn-outline-secondary" (click)="goBack()">
+  Back
+</button>
+<div class="card">
+    <img class="card-img-top" 
+    src="{{pokemonDetails.imgUrl}}" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{{pokemonDetails.name}}</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let ab of pokemonDetails.abilities">{{ab.ability}}</li>
+        </ul>
+      <h5>Height : {{pokemonDetails.height}}</h5>
+      <h5>Weight : {{pokemonDetails.weight}}</h5>
+      <button class="btn btn-outline-secondary" (click)="goBack()">
+        Go Back
+      </button>
+    </div>
+  </div>

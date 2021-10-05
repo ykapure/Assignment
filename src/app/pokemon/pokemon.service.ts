@@ -2,9 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PokemonService {
 
   constructor(private http: HttpClient){ }
@@ -17,6 +15,15 @@ export class PokemonService {
       }
     }
     return this.http.get<any>(this.baseUrl, { params: param});
+  }
+  getPokemonDetails(url: any): Observable<any> {
+    // let param = new HttpParams();
+    // for(const key in obj) {
+    //   if (key && obj[key] != null) {
+    //     param = param.append(key, obj[key])
+    //   }
+    // }
+    return this.http.get<any>(url);
   }
   
 }
