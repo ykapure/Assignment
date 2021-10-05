@@ -1,5 +1,6 @@
 import { PokemonService } from './../pokemon.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -9,26 +10,65 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 export class PokemonListComponent implements OnInit, OnDestroy {
 
   pokemonList: any = [];
-  page = 0; 
-  itemsPerPage = 20;
-  totalItems : any;
+  
+  currentCard: any;
+  currentIndex = -1;
+  searchKey: any = null;
+  ability: any = null;
+  
+  page = 1; 
+  itemsPerPage: any = 20;
+  pageSizes = [10, 20, 50];
+  totalItems = 0;
 
-  constructor(private service: PokemonService) { 
+  constructor(private service: PokemonService,private spinner: NgxSpinnerService) { 
   }
 
   ngOnInit(): void {
-    this.service.getPokemonList(this.itemsPerPage, this.page).subscribe((response) => {
-      this.pokemonList = response.results;
-      // this.page = 0;
-      this.totalItems = response.count;
-    });
+    this.getPokemonList();
   }
 
-  getNextPage(page: any){
-    this.service.getPokemonList(this.itemsPerPage, page).subscribe((response) => {
+  getRequestParams(searchKey: any, page: number, itemsPerPage: number): any {
+    let params: any = {};
+
+    if (searchKey) {
+      params['name'] = searchKey;
+      params['ability'] = searchKey;
+    }
+    if (page) { params['offset'] = page - 1; }
+    if (itemsPerPage) { params['limit'] = itemsPerPage; }
+
+    return params;
+  }
+
+  getPokemonList() {
+    const reqParams = this.getRequestParams(this.searchKey, this.page, this.itemsPerPage);
+    this.spinner.show();
+    this.service.getPokemonList(reqParams).subscribe((response) => {
       this.pokemonList = response.results;
       this.totalItems = response.count;
-    });
+      this.spinner.hide();
+    },
+    (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });;
+  }
+
+  pageChange(page: number): void {
+    this.page = page;
+    this.getPokemonList();
+  }
+
+  itemsPerPageChange(event: any): void {
+    this.itemsPerPage = event.target.value;
+    this.page = 1;
+    this.getPokemonList();
+  }
+
+  setActiveCard(poke: any, ind: any) {
+    console.log(poke);
+    console.log(ind);
   }
 
   ngOnDestroy(): void {

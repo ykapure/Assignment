@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,10 +8,15 @@ import { Injectable } from '@angular/core';
 export class PokemonService {
 
   constructor(private http: HttpClient){ }
-
-  getPokemonList(itemsPerPage: any,page: any): Observable<any> {
-    
-    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${page}`);
+  baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  getPokemonList(obj: any): Observable<any> {
+    let param = new HttpParams();
+    for(const key in obj) {
+      if (key && obj[key] != null) {
+        param = param.append(key, obj[key])
+      }
+    }
+    return this.http.get<any>(this.baseUrl, { params: param});
   }
   
 }

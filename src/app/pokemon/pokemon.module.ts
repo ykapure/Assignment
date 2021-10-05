@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
-import { DataTablesModule } from 'angular-datatables';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -13,8 +14,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     CommonModule,
     PokemonRoutingModule,
-    DataTablesModule,
+    FormsModule,
     NgxPaginationModule,
+    // NgxSpinnerModule
   ]
 })
 export class PokemonModule { }
