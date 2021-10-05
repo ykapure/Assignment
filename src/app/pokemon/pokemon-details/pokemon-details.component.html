@@ -5,9 +5,10 @@
     <img class="card-img-top" 
     src="{{pokemonDetails.imgUrl}}" alt="">
     <div class="card-body">
-      <h4 class="card-title">{{pokemonDetails.name}}</h4>
+      <h3 class="card-title">{{pokemonDetails.name | uppercase}}</h3>
+      <h5>Ability : </h5>
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let ab of pokemonDetails.abilities">{{ab.ability}}</li>
+            <li class="list-group-item" *ngFor="let ab of pokemonDetails.abilities">{{ab.ability.name}}</li>
         </ul>
       <h5>Height : {{pokemonDetails.height}}</h5>
       <h5>Weight : {{pokemonDetails.weight}}</h5>

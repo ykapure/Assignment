@@ -23,11 +23,12 @@ export class PokemonDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.sharedData.subscribe((sharedObj)=> {
-      if (sharedObj) {
-        this.pokemon = sharedObj['activePokemon'];
+      if (sharedObj.activePokemon != undefined) {
+        this.pokemon = sharedObj.activePokemon;
         this.getPokemonDetails(this.pokemon)
       } else {
         this.spinner.hide();
+        this.route.navigate(['/pokemon']);
       }
     })
   }
